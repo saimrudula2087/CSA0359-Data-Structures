@@ -1,0 +1,42 @@
+#include<stdio.h>
+int bis(int a[],int low,int high,int target)
+{
+	int mid;
+	if(high>=low)
+	{
+		mid=(low+high)/2;
+		if(a[mid]==target)
+		{
+			return mid;
+		}
+		else if(a[mid]<target)
+		{
+			return bis(a,mid+1,high,target);
+		}
+		else
+		{
+			return bis(a,low,mid-1,target);
+		}
+	}
+	return -1;
+}
+int main()
+{
+	int a[10],n,high,low,i,target;
+	printf("Enter the array size: ");
+	scanf("%d",&n);
+	printf("\nEnter array elements: ");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	printf("\nEnter the target element: ");
+	scanf("%d",&target);
+	int res=bis(a,0,n-1,target);
+	if(res==-1)
+	{
+		printf("\nTarget not found");
+	}
+	else
+	printf("\nTarget found at %d",res);
+}
