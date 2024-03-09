@@ -1,0 +1,66 @@
+#include<stdio.h>
+#define maxsize 100
+struct Queue
+{
+	int item[maxsize];
+	int front;
+	int rear;
+};
+int isfull(struct Queue* queue)
+{
+	return queue->rear==maxsize-1;
+}
+int isempty(struct Queue* queue)
+{
+	return queue->front==-1||(queue->front>queue->rear);
+}
+void enqueue(struct Queue* queue,int value)
+{
+	if(isfull(queue))
+	{
+		printf("queue is full,cannot enqueue");
+		return;
+	}
+	if(queue->front==-1)
+	{
+	    queue->front=0;
+	}
+	queue->rear++;
+	queue->item[queue->rear]=value;
+}
+int dequeue(struct Queue* queue)
+{
+	if(isempty(queue))
+	{
+		printf("queue is empty,cannot dequeue");
+		return -1;
+	}
+	int removeditem=queue->item[queue->front];
+	queue->front++;
+	return removeditem;
+}
+int display(struct Queue* queue)
+{
+	if(isempty(queue))
+	{
+		printf("queue is empty");
+	}
+	printf("\nqueue elements: ");
+	for(int i=queue->front;i<=queue->rear;i++)
+	{
+		printf("%d ",queue->item[i]);
+	}
+	printf("\n");
+}
+int main()
+{
+	struct Queue queue={{0},-1,-1};
+	enqueue(&queue,1);
+	enqueue(&queue,2);
+	enqueue(&queue,3);
+	display(&queue);
+	printf("dequeued element : %d",dequeue(&queue));
+	display(&queue);
+	printf("Front value : %d",queue.front);
+	printf("\nRear value : %d",queue.rear);
+}
