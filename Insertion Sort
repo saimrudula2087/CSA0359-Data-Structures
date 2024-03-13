@@ -1,0 +1,57 @@
+#include <stdio.h>
+void insertionSort(int arr[], int n)
+{
+    int i, key, j;
+    for (i = 1; i < n; i++) 
+	{
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) 
+		{
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+        if (i == 2) 
+		{
+            printf("Iteration %d: ", i);
+            for (int k = 0; k < n; k++) 
+			{
+                printf("%d", arr[k]);
+                if (k < n - 1) 
+				{
+                    printf(",");
+                }
+            }
+            printf("\n");
+        }
+    }
+}
+int main() 
+{
+    int arr[] = {54,82,45,98,72};
+    int n = sizeof(arr) / sizeof(arr[0]);
+	printf("Input: ");
+    for (int i = 0; i < n; i++)
+	{
+        printf("%d", arr[i]);
+        if (i < n - 1) 
+		{
+            printf(",");
+        }
+    }
+    printf("\n");
+    insertionSort(arr, n);
+    printf("Output: ");
+    for (int i = 0; i < n; i++) 
+	{
+        printf("%d", arr[i]);
+        if (i < n - 1) 
+		{
+            printf(",");
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
