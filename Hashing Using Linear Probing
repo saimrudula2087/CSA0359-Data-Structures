@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 10
+int hash(int key) 
+{
+    return key % SIZE;
+}
+int probe(int key, int i) 
+{
+    return (hash(key) + i) % SIZE;
+}
+void insert(int *hash_table, int key) 
+{
+    int index = hash(key);
+    int i = 0;
+    while (hash_table[index] != -1) 
+	{
+        index = probe(key, ++i);
+    }
+    hash_table[index] = key;
+}
+void display(int *hash_table) 
+{
+    printf("\nHash Table:\n");
+    printf("Index\tValue\n");
+    for (int i = 0; i < SIZE; i++) 
+	{
+        printf("%d\t%d\n", i, hash_table[i]);
+    }
+}
+int main() {
+    int hash_table[SIZE];
+    for (int i = 0; i < SIZE; i++) 
+	{
+        hash_table[i] = -1; 
+    }
+    insert(hash_table, 12);
+    insert(hash_table, 25);
+    insert(hash_table, 35);
+    insert(hash_table, 50);
+    insert(hash_table, 67);
+    insert(hash_table, 7);
+    insert(hash_table, 63);
+    insert(hash_table, 21);
+    insert(hash_table, 89);
+    insert(hash_table, 54);
+    display(hash_table);
+}
